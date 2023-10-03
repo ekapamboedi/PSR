@@ -6,9 +6,11 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const apiRouter = require('./routes/api');
+
 
 var app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
   
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -18,35 +20,30 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+// Serve static assets from Nuxt app
+app.use('/nuxt', express.static(path.join(__dirname, '../nuxt3-admin-template/.nuxt')));
 
-// app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 
 
+// app.use('/', indexRouter);
 // Serve the API routes
 app.use('/api', apiRouter);
 
 // Serve the Nuxt app
 const nuxt = require('nuxt');
-const config = require('../nuxt-app/nuxt.config.js');
+const config = require('../nuxt3-admin-template/nuxt.config.ts');
 const nuxtApp = new nuxt.Nuxt(config);
 
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+// Middleware to handle Nuxt rendering
+app.use('/nuxt', (req, res) => {
+  res.status(200);
+  nuxtApp.render(req, res);
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+// Start the server
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });
 
 module.exports = app;
