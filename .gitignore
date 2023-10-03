@@ -1,0 +1,17 @@
+#Express
+/backend/node_modules
+*/backend.log*
+.env
+dist
+package-lock.json
+# Nuxt
+/nuxt3-admin-template/node_modules
+*/nuxt3-admin-template/.log*
+/nuxt3-admin-template/.nuxt
+/nuxt3-admin-template/.nitro
+/nuxt3-admin-template/.cache
+/nuxt3-admin-template/.output
+/nuxt3-admin-template/.env
+/nuxt3-admin-template/dist
+/nuxt3-admin-template/package-lock.json
+/nuxt3-admin-template/pnpm-lock.yaml
