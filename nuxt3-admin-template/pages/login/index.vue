@@ -69,6 +69,7 @@ const toggleFormError = () => {
     formError.value = false;
   }, 1250);
 };
+
 </script>
 
 <template>
