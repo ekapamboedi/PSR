@@ -25,13 +25,12 @@ export default defineNuxtConfig({
     "@pinia-plugin-persistedstate/nuxt",
     "@kevinmarrec/nuxt-pwa",
     "@vueuse/nuxt",
-  ],
+    "@nuxt/http"
+  ]
+  ,
   pwa: {
     workbox: {
       enabled: false,
     },
   },
-  router: {
-    base:"/admin/"
-  }
 });
